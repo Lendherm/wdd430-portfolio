@@ -1,18 +1,48 @@
 # WDD 430 Portfolio
 
-Course portfolio for **WDD 430 — Web Full-Stack Development** (BYU-Idaho).
+Portfolio site for **Luis Emilio Nathanael De la rosa Meneses** — WDD 430 Web Full-Stack Development.
 
-## Week 01
+Built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS**.
 
-| Activity | Folder |
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Pages & API
+
+| Route | Description |
 |---|---|
-| Stripe Dashboard tech-stack forum | [`week01/forum`](week01/forum) |
-| Direct DOM vs React + Babel | [`week01/react-dom-practice`](week01/react-dom-practice) |
-| React core concepts (components, props, state) | [`week01/react-core-concepts`](week01/react-core-concepts) |
+| `/` | Home — portfolio project list |
+| `/about` | About page with custom `SkillCard` components |
+| `/api/hello` | Simple API route (`GET`) |
 
-### How to view the HTML practices
+## Project Structure
 
-Open these files in a browser (double-click or drag into Chrome/Edge):
+```
+wdd430-portfolio/
+├── app/
+│   ├── about/page.tsx
+│   ├── api/hello/route.ts
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── ProjectCard.tsx
+│   ├── ProjectList.tsx
+│   └── SkillCard.tsx
+├── public/
+├── week01/          # Week 01 learning activities
+└── package.json
+```
 
-- `week01/react-dom-practice/dom.html`
-- `week01/react-core-concepts/react-core-concepts.html`
+## Week 01 Materials
+
+Earlier Week 01 practice files live in [`week01/`](week01/).
