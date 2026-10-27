@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WDD 430 — React vs Direct DOM</title>
+
+    <!-- React core library -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- ReactDOM — render React components into the DOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel — transpile JSX in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>Direct DOM vs React</h1>
+
+    <h2>Manipulación directa del DOM</h2>
+    <article id="direct-news"></article>
+
+    <h2>Usando React</h2>
+    <article id="react-news"></article>
+
+    <!-- Direct DOM manipulation -->
+    <script>
+      const paragraph = document.createElement("p");
+      paragraph.textContent = "Últimas noticias: ¡React es increíble!";
+      document.getElementById("direct-news").appendChild(paragraph);
+    </script>
+
+    <!-- React + JSX (Babel transpiles type="text/jsx") -->
+    <script type="text/jsx">
+      function News() {
+        return <p>Últimas noticias: ¡React es increíble!</p>;
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("react-news"));
+      root.render(<News />);
+    </script>
+  </body>
+</html>

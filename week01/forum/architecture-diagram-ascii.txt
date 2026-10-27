@@ -1,0 +1,36 @@
+STRIPE DASHBOARD — SIMPLE ARCHITECTURE DIAGRAM
+================================================
+
++--------------------------------------------------------------+
+|  FRONTEND (Browser)                                          |
+|  React + TypeScript + Sail design system + CSS/Sass          |
+|  (Charts: D3 / Canvas for analytics)                         |
++--------------------------------------------------------------+
+                 |  HTTP Request (REST API)
+                 |  e.g. GET /v1/charges
+                 v
+                 |  JSON Response
+                 ^
++--------------------------------------------------------------+
+|  BACKEND (Servers / APIs)                                    |
+|  Ruby (+ Sorbet)  |  Go services  |  REST API + Webhooks     |
+|  AWS  |  Docker / Kubernetes                                 |
++--------------------------------------------------------------+
+                 |  Read / Write / Cache / Events
+                 v
+                 |  Data returned to API
+                 ^
++--------------------------------------------------------------+
+|  DATA LAYER                                                  |
+|  DocDB (MongoDB)  |  Redis  |  Elasticsearch  |  Kafka       |
++--------------------------------------------------------------+
+
+
+DATA FLOW (example: merchant views recent payments)
+----------------------------------------------------
+1. User clicks "Payments" in Dashboard
+2. Frontend (React/TS) sends authenticated REST request
+3. Backend (Ruby) checks permissions + business rules
+4. Backend reads from DocDB (and may use Redis/Elasticsearch)
+5. Backend returns JSON
+6. Frontend updates the UI with payment rows

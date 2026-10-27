@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stripe Dashboard — Architecture Diagram</title>
+  <style>
+    :root {
+      --ink: #0a2540;
+      --muted: #425466;
+      --line: #c5d0de;
+      --bg: #f6f9fc;
+      --card: #ffffff;
+      --accent: #635bff;
+      --green: #00d4ff;
+      --pink: #ff80ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 32px 24px 48px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .diagram {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .layer {
+      width: 100%;
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 22px;
+      box-shadow: 0 8px 24px rgba(10, 37, 64, 0.06);
+    }
+
+    .layer h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: white;
+    }
+
+    .frontend .badge { background: var(--accent); }
+    .backend .badge { background: #0a2540; }
+    .data .badge { background: #0d9488; }
+
+    .techs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech {
+      background: #eef2f7;
+      border: 1px solid #d7dee8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .tech small {
+      display: block;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .arrow {
+      font-size: 1.4rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .legend {
+      max-width: 920px;
+      margin: 28px auto 0;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: #fff;
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .legend strong { color: var(--ink); }
+
+    @media print {
+      body { background: white; padding: 16px; }
+      .layer { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="diagram">
+    <div style="width:100%; text-align:left;">
+      <h1>Stripe Dashboard — Simple Architecture</h1>
+      <p class="subtitle">Frontend → Backend → Data Layer &nbsp;|&nbsp; Requests ↓ &nbsp; Responses ↑</p>
+    </div>
+
+    <!-- FRONTEND -->
+    <section class="layer frontend">
+      <h2><span class="badge">Frontend</span> User Interface (Browser)</h2>
+      <div class="techs">
+        <div class="tech">React<small>UI components</small></div>
+        <div class="tech">TypeScript<small>type-safe JS</small></div>
+        <div class="tech">Sail<small>design system</small></div>
+        <div class="tech">CSS / Sass<small>styling</small></div>
+        <div class="tech">Charts (D3 / Canvas)<small>analytics views</small></div>
+      </div>
+    </section>
+
+    <div class="flow">
+      <div class="arrow">↓</div>
+      HTTP Request (REST API) — e.g. “list payments”, “create refund”
+      <div class="arrow">↑</div>
+      JSON Response — UI updates Dashboard
+    </div>
+
+    <!-- BACKEND -->
+    <section class="layer backend">
+      <h2><span class="badge">Backend</span> Server / API Logic</h2>
+      <div class="techs">
+        <div class="tech">Ruby + Sorbet<small>core API &amp; business rules</small></div>
+        <div class="tech">Go<small>infra / performance services</small></div>
+        <div class="tech">REST API + Webhooks<small>public interface</small></div>
+        <div class="tech">AWS<small>cloud hosting</small></div>
+        <div class="tech">Docker / Kubernetes<small>containers &amp; orchestration</small></div>
+      </div>
+    </section>
+
+    <div class="flow">
+      <div class="arrow">↓</div>
+      Queries / Writes / Cache lookups / Events
+      <div class="arrow">↑</div>
+      Stored data returned to API
+    </div>
+
+    <!-- DATA -->
+    <section class="layer data">
+      <h2><span class="badge">Data Layer</span> Storage &amp; Retrieval</h2>
+      <div class="techs">
+        <div class="tech">DocDB (MongoDB)<small>primary document store</small></div>
+        <div class="tech">Redis<small>caching</small></div>
+        <div class="tech">Elasticsearch<small>search</small></div>
+        <div class="tech">Apache Kafka<small>event streaming</small></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="legend">
+    <strong>Data flow example:</strong> A merchant opens Payments in the Dashboard →
+    React sends an authenticated request to Stripe’s API →
+    Ruby services authorize the user and query DocDB (and maybe Redis/Elasticsearch) →
+    JSON comes back → React re-renders the payments table.
+    External apps can also get <strong>webhooks</strong> when payment events occur.
+  </div>
+</body>
+</html>

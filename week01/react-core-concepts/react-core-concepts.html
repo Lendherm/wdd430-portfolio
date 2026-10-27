@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WDD 430 — React Core Concepts</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <!--
+      A component is a reusable function that returns JSX and represents one piece of the UI,
+      like a greeting or a counter. Props are read-only data passed from a parent to a child
+      so you can customize that component without rewriting it (for example, different names).
+      State is data that belongs to a component and can change over time. When you update state
+      with a setter like setCount, React re-renders the component so the UI shows the new values.
+      Together, components + props + state let you build dynamic interfaces from small pieces.
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/jsx">
+      // Greeting component — accepts a name prop for a personalized message
+      function Greeting(props) {
+        return <h2>Welcome aboard, {props.name}!</h2>;
+      }
+
+      // Counter component — uses useState to track and update a count
+      function Counter() {
+        const [count, setCount] = React.useState(0);
+
+        return (
+          <div>
+            <h2>Count: {count}</h2>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+          </div>
+        );
+      }
+
+      // Parent component that nests Greeting and Counter
+      function App() {
+        return (
+          <div>
+            <h1>React Core Concepts</h1>
+            <Greeting name="Alice" />
+            <Counter />
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
